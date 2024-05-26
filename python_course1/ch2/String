@@ -1,0 +1,37 @@
+
+name="python"
+age=270.0
+
+new_str = "我是"+name+"\n" +str(age)
+print(new_str)
+
+new_str2="我{},今年{}歲了".format(name,age)
+
+new_str3="我是%s,現在%d歲" % (name,age)
+
+new_str4="我{name},今年{age}歲了".format(
+    name='aaa',age=27.0)
+
+new_str5=f"我{name},今年{age}歲了"
+
+
+
+
+
+x="Hello World"
+
+b= x.split(" ")
+
+print(b)
+
+
+
+
+print(new_str5)
+# print(new_str2)
+# print(new_str4) 
+# print(new_str5)
+
+# 註釋
+# 註釋
+#代碼 PEP8

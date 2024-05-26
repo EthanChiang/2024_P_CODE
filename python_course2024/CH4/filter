@@ -1,0 +1,6 @@
+def even(num):
+    return num%2==0
+
+myList = [44345,43535,35435,435]
+for item in filter(even,myList):
+    print(item)

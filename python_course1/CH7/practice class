@@ -1,0 +1,16 @@
+class test:
+    def __init__(self, tea):
+        self.tea = tea
+
+    def doSomething(self):
+        print('lst"s Rock')
+
+
+class subTest(test):
+    def eat(self):
+        pass
+
+
+a = subTest("redtea")
+
+a.doSomething()

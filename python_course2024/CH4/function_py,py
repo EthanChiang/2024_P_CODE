@@ -1,0 +1,26 @@
+# def sum(*argv):
+#     result= 0
+#     for i in range(0,len(argv)):
+#         print(f"we are now at number {i}")
+#         print(f"The number is {argv[i]}")
+#         result += argv[i]
+#     return result        
+
+
+# print(f"sum is {sum(1,2,30,4,10,6,7)}")
+
+# def myfunc(*argv,**kwargs):
+#     print("I would like to eat {} {}".format(argv[1], kwargs["food"]))
+
+
+# myfunc(14,17,31,"hello",name="wilson",food="eggs")    
+
+def func(p1,p2,p3="three",*args,**kwargs):
+    print("--------------------------------")
+    print(p1,p2,p3,args,kwargs)
+
+func(1,2,3,4,5,x=1,y=3)
+func(1,2,3,x=4)
+func(1,2,3,4)
+func(1,2,3)
+func(1,2)      

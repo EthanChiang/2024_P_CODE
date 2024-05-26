@@ -1,0 +1,15 @@
+a = [1, 2, 3]
+c="4e-2"
+b = [1, 'abc', 2.0, ['a', 'b', 'c']]
+s="NoFoldAB"
+# print(a)
+# print(b)
+# print("a[0]=", b[3])
+# print(b[0], b[1], b[2], b[3],sep='-',end="Bet")
+
+print(b[1:])
+# print(type(a))
+
+# print(s[-1])
+#print("type(a)")
+print(str(type(1)))

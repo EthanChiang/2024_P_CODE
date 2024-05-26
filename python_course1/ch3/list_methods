@@ -1,0 +1,36 @@
+
+list1 = [5, 8, 6 , 3 , 5]
+
+print('list長度:',len(list1))
+
+print('list最大值:',max(list1))
+
+list1.append(7)
+
+print("list1:",list1)
+
+list1.insert(1,9)
+
+print("list1插入9在地2個位置後結果",list1)
+
+list1.remove(5)
+
+print("刪除第一個5後",list1)
+
+list1[0]=1
+
+print(list1)
+
+# a="bac"
+
+# a[0] = "a"
+
+list1.reversed()
+
+list1.sort()
+
+list1.sort(reverse=true)
+
+
+
+

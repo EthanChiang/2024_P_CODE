@@ -1,0 +1,26 @@
+# myList=[1,2,3,4]
+
+
+# # help(len)
+
+# def change(a):
+#     # a=myList    # call by reference
+#     a[0]=100
+
+
+# change(myList)
+# print(myList)
+a=10
+def change(num):
+    global a
+    a=25
+
+
+def sum(n1,n2=10):
+    return n1+n2
+
+print(sum(12))
+
+#keyword argument
+print(sum(n2=100))
+    

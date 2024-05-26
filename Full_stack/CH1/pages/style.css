@@ -1,0 +1,33 @@
+/* table,
+tr,
+th,
+td {
+  border: 1px solid black;
+  border-collapse: collapse;
+}
+h1 {
+  color: red;
+}
+h2 {
+  color: green;
+} */
+
+/* element selector */
+
+/* h2 {
+  color: green;
+} */
+
+/* id selector */
+/* #first-paragraph {
+  color: rgb(100, 25, 200);
+} */
+/* class selector */
+/* .blue-text {
+  color: purple;
+} */
+/* 
+h1,
+h2 {
+  color: red;
+} */
