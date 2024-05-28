@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, g, redirect
+from flask import Flask, jsonify, render_template, request, g, redirect
 import sqlite3
 import requests
 import math
@@ -25,12 +25,12 @@ def home():
     cursor = conn.cursor()
     result = cursor.execute("select * from cash")
     cash_result = result.fetchall()
-    print(cash_result)
+    # print(cash_result)
     # 計算台幣與美金總額
     taiwanese_dollars = 0
     us_dollars = 0
     for data in cash_result:
-        print(type(data))
+        # print(type(data))
         taiwanese_dollars += data[1]
         us_dollars += data[2]
     # 獲取匯率資訊
@@ -38,9 +38,10 @@ def home():
     currency = r.json()
     total = math.floor(taiwanese_dollars + us_dollars *
                        currency['USDTWD']['Exrate'])
-
-    print(currency)
-    return render_template("index.html")
+    data = {'total': total, 'td': taiwanese_dollars,
+            'ud': us_dollars, 'currency': currency['USDTWD']['Exrate'], 'cash_result': cash_result}
+    # print(currency)
+    return render_template("index.html", data=data)
 
 
 @app.route('/cash')
@@ -70,9 +71,61 @@ def submit_cash():
     return redirect("/")
 
 
-@app.route('/stock')
-def stock_form():
+@app.route('/cash-delete', methods=['POST'])
+def delete():
+    transcation_id = request.values['id']
+    conn = get_db()
+    cursor = conn.cursor()
+    cursor.execute("""delete from cash where transaction_id=?""",
+                   (transcation_id,))
+    conn.commit()
+    return redirect("/")
+
+
+@app.route("/stock")
+def stock():
     return render_template("stock.html")
+
+
+@app.route('/stock', methods=["POST"])
+def stock_form():
+    stock_id = request.values['stock-id']
+    stock_num = request.values['stock-num']
+    stock_price = request.values['stock-price']
+    processing_fee = 0
+    tax = 0
+    if request.values['processing-fee'] != '':
+        processing_fee = request.values['processing-fee']
+    if request.values['tax'] != '':
+        tax = request.values['tax']
+    date = request.values['date']
+    print(stock_id, stock_num, stock_price, processing_fee, tax)
+    # 更新數據庫資料
+    conn = get_db()
+    cursor = conn.cursor()
+    cursor.execute("""insert into stock (stock_id, stock_num, stock_price, processing_fee, tax, date_info) values (?, ?, ?, ?, ?, ?)""",
+                   (stock_id, stock_num, stock_price, processing_fee, tax, date))
+    conn.commit()
+    # 將使用者導回主頁面
+    return redirect('/')
+
+
+@app.route('/stock', methods=["POST"])
+def submit_stock():
+
+    return render_template("stock.html")
+
+
+@app.route("/test")
+@app.route("/test/<name>")
+def test(name=None):
+    return render_template("test.html", name2=name)
+
+
+@app.route("/info", methods=["POST"])
+def ruturnSomething():
+    # JavaScript Object Notation
+    return jsonify({"info": "you have successfully make a request"})
 
 
 if __name__ == '__main__':
