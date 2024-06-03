@@ -5,7 +5,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
   </head>
-  <h1>TEST</h1>
-  <body></body>
-  <script src="leetcodejs.js"></script>
+  <body>
+    <p>test</p>
+  </body>
+  <script>
+    function add(a, b, c) {
+      setTimeout(() => {
+        c(a + b);
+      }, 2000);
+      console.log("543");
+    }
+
+    // function add(a, b, c) {
+    //   c(a);
+    // }
+    add(5, 4, function (result) {
+      console.log(result);
+    });
+  </script>
 </html>
