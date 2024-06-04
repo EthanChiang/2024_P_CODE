@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <script>
+    window.onload = () => {
+      bn.onclick = async () => {
+        const f1 = async () => {
+          return "f1 done";
+        };
+        const f2 = async () => {
+          return "f2 done";
+        };
+        let result = await f1();
+        console.log(result);
+
+        f2().then((result) => {
+          console.log(result);
+        });
+        // f1((result) => {
+        //   console.log(result);
+        //   f2((result) => {
+        //     console.log(result);
+        //   });
+        // });
+
+        console.log("done");
+      };
+    };
+  </script>
+  <body>
+    <button id="bn">click</button>
+  </body>
+</html>

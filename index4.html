@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <style>
+    .良好 {
+      color: white;
+      background-color: green;
+    }
+    .普通 {
+      color: black;
+      background-color: yellow;
+    }
+  </style>
+  <body>
+    <input type="text" />
+    <button id="bn">click</button>
+    <div id="content"></div>
+  </body>
+  <script>
+    window.onload = () => {
+      bn.onclick = () => {
+        content.innerHTML = "🌀";
+        fetch(
+          "https://raw.githubusercontent.com/kirkchu/mongodb/main/aqiv2.json"
+        )
+          .then(async (response) => {
+            return response.json();
+          })
+          .then((jsonObj) => {
+            let rows = `
+               <table border="1">
+                   <tr><th>縣市</th><th>地區</th><th>AQI</th><th>說明</th></tr>
+           `;
+            jsonObj.records
+              .sort((a, b) => {
+                return parseInt(a.aqi) - parseInt(b.aqi);
+              })
+              .forEach((record) => {
+                rows += `<tr class="${record.status}">
+                           <td>${record.county}</td>
+                           <td>${record.sitename}</td>
+                           <td>${record.aqi}</td>
+                           <td>${record.status}</td>
+                       </tr>`;
+              });
+
+            rows += "</table>";
+            content.innerHTML = rows;
+          });
+      };
+    };
+  </script>
+</html>

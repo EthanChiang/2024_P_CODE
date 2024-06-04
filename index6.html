@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body></body>
+  <script>
+    // function Car(plate) {
+    //   this.plate = plate;
+    // }
+    class Car {
+      constructor(plate) {
+        this.plate = plate;
+      }
+    }
+
+    function Person(name, lastname, age) {
+      this.name = name;
+      this.lastname = lastname;
+      this.age = age;
+      this.fullname = () => {
+        return `${name} ${lastname}`;
+      };
+    }
+
+    function Superman(name, lastname, age) {
+      Person.call(this, name, lastname, age);
+      this.flyTo = (city) => {
+        this.at = city;
+      };
+    }
+
+    window.onload = () => {
+      const david = new Person("David", "Wang", 30);
+      const betty = new Person("Betty", "Li", 28);
+      david.wife = betty;
+      console.log(david.wife.age);
+      david.wife.husband = david;
+      console.log(betty.husband.fullname());
+
+      betty.car = new Car("aa-1234");
+      console.log(david.wife.car.plate);
+
+      const superman = new Superman("Clark", "Kent", 30);
+      console.log(superman.fullname());
+      superman.flyTo("Taichung");
+      console.log(superman.at);
+    };
+  </script>
+</html>

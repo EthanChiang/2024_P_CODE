@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <script>
+    const arithmetic = (a, b, operator, complete) => {
+      const op = operator();
+      let error = null;
+      let result = null;
+      switch (op) {
+        case "+":
+          reault = a + b;
+          break;
+
+        case "-":
+          result = a - b;
+          break;
+
+        case "/":
+          if (b == 0) {
+            result = undefined;
+            error = "分母不可為零";
+          } else {
+            result = a / b;
+          }
+          break;
+
+        default:
+          result = undefined;
+          error = "not support";
+      }
+      setTimeout(() => {
+        complete(result, error);
+      }, 0);
+    };
+
+    window.onload = function () {
+      bn.onclick = () => {
+        arithmetic(
+          5,
+          0,
+          () => {
+            return "/";
+          },
+          (result, error) => {
+            console.log(result);
+            if (error == null) {
+              label.innerHTML = result;
+            } else {
+              console.log(error);
+            }
+          }
+        );
+        console.log("done");
+      };
+    };
+  </script>
+  <body>
+    <button id="bn">click</button>
+    <label id="label"></label>
+  </body>
+</html>
