@@ -1,12 +1,28 @@
 $(document).ready(function () {
   $(".headerPage").load("header.html");
+  loadJsonData();
+  // dataTable();
 
-  dataTable();
+  // loadDataTable();
 
-  loadDataTable();
-
-  loadDataToJQData();
+  // loadDataToJQData();
 });
+
+function loadJsonData() {
+  fetch("Banqiao.json")
+    .then(async (response) => {
+      return response.json();
+    })
+    .then((json) => {
+      // console.log(typeof json);
+      dataTable(json);
+      print(json);
+    });
+}
+
+function print(dataset) {
+  dataset.foreach;
+}
 
 function loadDataToJQData() {
   document.querySelector(".test").innerHTML = "🌀資料載入中";
@@ -24,27 +40,33 @@ function loadDataToJQData() {
     });
 }
 
-function dataTable() {
-  var data = [
-    [1, 2, 3],
-    [3, 4, 3],
-    [3, 4, 4],
-    [3, 4, 4],
-    [3, 4, 4],
-    [3, 4, 4],
-    [3, 4, 4],
-    [3, 4, 4],
-    [3, 4, 4],
-    [3, 4, 4],
-    [3, 4, 4],
-    [3, 4, 4],
-    [3, 4, 4],
-  ];
+function dataTable(data) {
+  // console.log("123:", data);
+  // var data = [
+  //   [1, 2, 3],
+  //   [3, 4, 3],
+  //   [3, 4, 4],
+  //   [3, 4, 4],
+  //   [3, 4, 4],
+  //   [3, 4, 4],
+  //   [3, 4, 4],
+  //   [3, 4, 4],
+  //   [3, 4, 4],
+  //   [3, 4, 4],
+  //   [3, 4, 4],
+  //   [3, 4, 4],
+  //   [3, 4, 4],
+  // ];
   $("#myTable").DataTable({
-    searching: true,
-    pageLength: "10", // 預設為'10'，若需更改初始每頁顯示筆數，才需設定
-    autoWidth: true, // 預設為true　設置是否要自動調整表格寬度(false代表不要自適應)
     data: data,
+    ordering: false,
+    columns: [
+      { data: "rps21" },
+      { data: "rps01" },
+      { data: "rps15" },
+      { data: "rps11" },
+      { data: "rps07" },
+    ],
   });
 }
 
