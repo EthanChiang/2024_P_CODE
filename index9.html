@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <style>
+    #container {
+      width: 400px;
+      height: 300px;
+      background-color: bisque;
+    }
+  </style>
+  <body>
+    <div id="container">
+      <canvas id="mychart"></canvas>
+    </div>
+  </body>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+  <script>
+    // const data = [
+    //   { attribute: "力量", value: 300 },
+    //   { attribute: "生命力", value: 110 },
+    //   { attribute: "智力", value: 80 },
+    //   { attribute: "魔法", value: 160 },
+    //   { attribute: "敏捷", value: 70 },
+    // ];
+
+    const data = [
+      {
+        year: 2020,
+        count: 180,
+        count1: 240,
+        color: "yellow",
+      },
+      {
+        year: 2021,
+        count: 230,
+        count1: 220,
+        color: "red",
+      },
+      {
+        year: 2022,
+        count: 300,
+        count1: 300,
+        color: "brown",
+      },
+      {
+        year: 2023,
+        count: 200,
+        count1: 400,
+        color: "cyan",
+      },
+    ];
+
+    new Chart(document.getElementById("mychart"), {
+      type: "bar",
+      data: {
+        labels: data.map((x) => x.year), // [2020, 2021, 2022, 2023]
+        datasets: [
+          {
+            label: "2020-2023 上半年銷售額",
+            backgroundColor: data.map((x) => x.color),
+            data: data.map((x) => x.count), // [200, 180, 230, 300]
+          },
+          {
+            label: "2020-2023 下半年銷售額",
+            data: data.map((x) => x.count1),
+          },
+        ],
+      },
+    });
+
+    // window.onload = () => {
+    //   setInterval(() => {
+    //     let d = new Date(Date.now() + 60 * 60 * 1000); //東京時間
+    //     let cc = `${d.getHours()}:${d.getMinutes()}:${d.getSeconds()}`;
+    //     clock.innerHTML = cc;
+    //   }, 1000);
+    // };
+  </script>
+</html>

@@ -5,6 +5,74 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
   </head>
-  <body></body>
-  <script></script>
+  <body>
+    <table border="1">
+      <tr>
+        <td>項次</td>
+        <td>名稱</td>
+        <td>數量</td>
+        <td>操作</td>
+      </tr>
+      <tr pid="p001">
+        <td>1</td>
+        <td>鉛筆</td>
+        <td>5</td>
+        <td><button>inc</button><button>dec</button></td>
+      </tr>
+      <tr id="p002">
+        <td>2</td>
+        <td>原子筆</td>
+        <td>8</td>
+        <td><button>inc</button><button>dec</button></td>
+      </tr>
+    </table>
+  </body>
+  <script>
+    document.querySelectorAll("button").forEach((button) => {
+      // console.log("button:" + button);
+      switch (button.textContent) {
+        case "inc":
+          button.onclick = (event) => {
+            const quantity = event.target.parentNode.previousElementSibling;
+            quantity.textContent = parseInt(quantity.textContent) + 1;
+          };
+          break;
+
+        case "dec":
+          button.onclick = (event) => {
+            const quantity = event.target.parentNode.previousElementSibling;
+            quantity.textContent = parseInt(quantity.textContent) - 1;
+            if (quantity.textContent == "0") {
+              quantity.parentNode.remove();
+              document.querySelectorAll("table tr").forEach((tr, index) => {
+                console.log(index);
+                if (index > 0) {
+                  tr.firstElementChild.textContent = index;
+                }
+              });
+            }
+
+            console.log("quantity.parentNode", quantity.parentNode);
+          };
+          break;
+      }
+
+      // console.log("button:", button);
+    });
+
+    one();
+    function one() {
+      const data = ["data01", "data02", "data03", "data2", "data3", "data4"];
+      const table = document.createElement("table");
+      table.setAttribute("border", 1);
+      document.body.append(table);
+      for (let row = 0; row < 2; row++) {
+        const tr = table.insertRow();
+        for (let col = 0; col < 3; col++) {
+          const td = tr.insertCell();
+          td.textContent = data[row * 3 + col];
+        }
+      }
+    }
+  </script>
 </html>

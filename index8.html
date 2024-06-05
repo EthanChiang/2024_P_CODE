@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <!-- <button id="bn">click</button>
+    <button id="bnclose">close</button> -->
+    <a id="apple" href="https://www.apple.com"></a>
+    <a id="apple" href="https://www.apple.com"></a>
+  </body>
+  <script>
+    // let win;
+    // bn.onclick = () => {
+    //   win = window.open("https://www.apple.com", "_blank");
+    //   location.href = "https://www.apple.com";
+    // };
+    // bnclose.onclick = () => {
+    //   win.close();
+    // };
+    document.querySelectorAll("a").forEach((link) => {
+      link.onclick = (event) => {
+        event.preventDefault();
+        if (confirm("準備")) {
+          location.href = event.target.href;
+        }
+      };
+    });
+  </script>
+</html>
