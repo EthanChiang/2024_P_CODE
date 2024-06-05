@@ -16,12 +16,7 @@ function loadJsonData() {
     .then((json) => {
       // console.log(typeof json);
       dataTable(json);
-      print(json);
     });
-}
-
-function print(dataset) {
-  dataset.foreach;
 }
 
 function loadDataToJQData() {
@@ -86,24 +81,4 @@ function loadDataTable() {
       rows += "</table>";
       content.innerHTML = rows;
     });
-
-  // .then((jsonObj) => {.....
-  //   let rows = `
-  //            <table border="1">
-  //                <tr><th>縣市</th></tr>
-  //        `;
-
-  //   jsonObj.records
-  //     .sort((a, b) => {
-  //       return parseInt(a.aqi) - parseInt(b.aqi);
-  //     })
-  //     .forEach((record) => {
-  //       rows += `<tr class="${record.status}">
-  //                        <td>${record.county}</td>
-  //                    </tr>`;
-  //     });
-
-  //   rows += "</table>";
-  //   content.innerHTML = rows;
-  // });
 }
