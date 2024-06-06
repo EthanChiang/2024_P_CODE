@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <style>
+    #video {
+      transform: rotateY(180deg);
+    }
+  </style>
+  <body>
+    <button id="bn">click</button>
+    <button id="send">send</button>
+    <!-- <video src="" id="video"></video> -->
+    <img src="" id="myimg" alt="" width="320" />
+  </body>
+  <script>
+    // const config = {
+    //   audio: false,
+    //   video: { width: 320, height: 240 },
+    // };
+    // window.onload = () => {
+    //   bn.onclick = () => {
+    //     navigator.mediaDevices.getUserMedia(config).then((mediaStream) => {
+    //       video.srcObject = mediaStream;
+    //       video.onloadedmetadata = () => {
+    //         video.play();
+    //       };
+    //     });
+    //   };
+    // };
+
+    window.onload = () => {
+      //0~65535 port 限制號碼 低於1000以下有可能被系統佔用
+      const ws = new WebSocket("ws://localhost:8765"); //ws不加密      wss 不加密
+      ws.onopen = () => {
+        console.log("連線成功");
+      };
+      ws.onmessage = (event) => {
+        console.log(event.data);
+      };
+      send.onclick = () => {
+        ws.send("hello,World");
+      };
+
+      bn.onclick = () => {
+        fetch(
+          "https://raw.githubusercontent.com/kirkchu/mongodb/main/elephant.jpg"
+        )
+          .then((res) => res.blob())
+          .then(async (jpeg) => {
+            myimg.src = URL.createObjectURL(jpeg);
+            const byteArray = new Uint8Array(await jpeg.arrayBuffer());
+
+            ws.send(byteArray);
+            // const base64 = btoa(String.fromCharCode(...byteArray));
+            // console.log(byteArray);
+            // console.log(base64);
+            // myimg.src = `data:image/jpeg;base64,${base64}`;
+          });
+      };
+    };
+  </script>
+</html>
