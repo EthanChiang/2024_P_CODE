@@ -1,0 +1,68 @@
+import asyncio from websockets.server import serve async def echo(websocket):
+print('hi') f = open('demo.jpeg', 'wb') async for message in websocket: #
+print(message) # await websocket.send(message) f.write(message) f.flush()
+f.close() async def main(): async with serve(echo, "localhost", 8765): await
+asyncio.Future() # run forever asyncio.run(main())
+===============================================
+===============================================
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <style>
+    #video {
+      transform: rotateY(180deg);
+      width: 320px;
+      height: 240px;
+    }
+  </style>
+  <script>
+    const config = {
+      audio: false,
+      video: {
+        width: 320,
+        height: 240,
+      },
+    };
+    window.onload = () => {
+      const ws = new WebSocket("ws://localhost:8765");
+      ws.onopen = () => {
+        console.log("連線成功");
+      };
+      ws.onmessage = (event) => {
+        console.log(event.data);
+      };
+
+      bn.onclick = () => {
+        navigator.mediaDevices.getUserMedia(config).then((mediaStream) => {
+          video.srcObject = mediaStream;
+          video.onloadedmetadata = () => {
+            video.play();
+          };
+
+          const recorder = new MediaRecorder(mediaStream);
+          recorder.ondataavailable = async (event) => {
+            const byteArray = new Uint8Array(await event.data.arrayBuffer());
+            ws.send(byteArray);
+          };
+        });
+      };
+    };
+  </script>
+  <body>
+    <button id="bn">click</button>
+    <p></p>
+    <video id="video"></video>
+  </body>
+</html>
+
+================================================== import asyncio from
+websockets.server import serve import os async def echo(websocket): print('hi')
+fd = os.open('vdo1', os.O_RDWR) f = os.fdopen(fd, 'wb') async for message in
+websocket: # print(message) # await websocket.send(message) f.write(message)
+async def main(): if not os.path.exists('vdo1'): os.mkfifo('vdo1') async with
+serve(echo, "localhost", 8765): await asyncio.Future() # run forever
+asyncio.run(main())
